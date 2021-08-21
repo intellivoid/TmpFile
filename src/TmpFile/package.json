@@ -15,7 +15,12 @@
             "pre_installation": []
         }
     },
-    "components": [],
+    "components": [
+        {
+            "required": true,
+            "file": "TmpFile.php"
+        }
+    ],
     "files": [
         "package.json"
     ]
