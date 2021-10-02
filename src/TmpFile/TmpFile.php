@@ -16,6 +16,11 @@
          * @var string the name of this file
          */
         protected $_fileName;
+
+        /**
+         * @var null|string
+         */
+        private static $tmpDir = null;
     
         /**
          * Constructor
@@ -49,7 +54,23 @@
             }
             file_put_contents($this->_fileName, $content);
         }
-    
+
+        /**
+         * @return string|null
+         */
+        public static function getCustomTmpDir()
+        {
+            return self::$tmpDir;
+        }
+
+        /**
+         * @param string|null $tmpDir
+         */
+        public static function setCustomTmpDir($tmpDir)
+        {
+            self::$tmpDir = $tmpDir;
+        }
+
         /**
          * Delete tmp file on shutdown if `$delete` is `true`
          */
@@ -85,6 +106,9 @@
          */
         public static function getTempDir()
         {
+            if(self::$tmpDir !== null)
+                return self::$tmpDir;
+
             if (function_exists('sys_get_temp_dir'))
             {
                 return sys_get_temp_dir();
